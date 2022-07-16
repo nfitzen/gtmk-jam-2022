@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: (C) 2022 UnrelatedString, nfitzen
+
 extends Node2D
 
 enum {UP, RIGHT, DOWN, LEFT}
