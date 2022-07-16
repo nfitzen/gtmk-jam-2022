@@ -6,14 +6,17 @@ var die_grid_pos = Vector2(0, 0)
 
 var grid = [[]]
 
-var die_transitions = { # with this face on top, what's on top after rolling in each direction
-    1: [,2,,5],
-    2: [4,6,3,1],
-    3: [2,,5,],
-    4: [5,,2,],
-    5: [3,1,4,6],
-    6: [,5,,2]
-   }
+class MutableDieState:
+    var top = 1
+    var bottom = 6
+    var sides = [5,4,2,3]
+    
+    func move(direction):
+        var old_top = top
+        top = sides[direction]
+        sides[direction] = bottom
+        bottom = sides[(direction+2)%4]
+        sides[(direction+2)%4] = old_top
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
