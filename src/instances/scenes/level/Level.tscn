@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://instances/scenes/level/Die.gd" type="Script" id=1]
+[ext_resource path="res://instances/scenes/level/TileMap.gd" type="Script" id=2]
+[ext_resource path="res://instances/scenes/level/Level.gd" type="Script" id=3]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 3 )
+n_steps = 16
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 1
+script = ExtResource( 2 )
+
+[node name="Die" type="AnimatedSprite" parent="."]
+script = ExtResource( 1 )
