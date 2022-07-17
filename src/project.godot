@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="GTMK Jam (scuffed)"
+config/name="Dice Press"
 run/main_scene="res://instances/scenes/init/init.tscn"
 config/icon="res://icon.png"
 

@@ -62,9 +62,5 @@ anchor_right = 0.387
 anchor_bottom = 0.544
 margin_left = -128.0
 margin_top = -130.0
-margin_right = 1348.71
-margin_bottom = -213.4
-rect_scale = Vector2( 0.696563, 3.42904 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_right = 3475.71
+margin_bottom = 39543.6

@@ -106,7 +106,7 @@ func initialize_grid(grid_size: int, n_steps: int):
             $Numbers.add_child(new_num);
 
     var tmp = round(grid_size / 2.0)
-    camera.position = Vector2(tmp, tmp)
+    camera.position = Vector2(tmp*17, tmp*13)
 
     var gen_weights = []
 
