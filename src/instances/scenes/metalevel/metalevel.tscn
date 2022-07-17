@@ -4,3 +4,10 @@
 
 [node name="Node" type="Node"]
 script = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+
+[node name="Level" type="Label" parent="CanvasLayer/Control"]
+text = "Level: 1"
