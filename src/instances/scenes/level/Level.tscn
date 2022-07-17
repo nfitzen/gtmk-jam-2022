@@ -1,32 +1,33 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://instances/scenes/level/Die.gd" type="Script" id=1]
 [ext_resource path="res://instances/scenes/level/TileMap.gd" type="Script" id=2]
 [ext_resource path="res://instances/scenes/level/Level.gd" type="Script" id=3]
 [ext_resource path="res://assets/sprites/tilemap.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/dice plain.png" type="Texture" id=5]
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
-points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, 0, 17, 0, 17, 13, 0, 13 )
 
-[sub_resource type="TileSet" id=1]
+[sub_resource type="TileSet" id=2]
 0/name = "tilemap.png 0"
 0/texture = ExtResource( 4 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 64, 64 )
+0/region = Rect2( 0, 0, 17, 13 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 2 )
+0/shape = SubResource( 1 )
 0/shape_one_way = false
 0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 2 ),
+"shape": SubResource( 1 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
@@ -34,7 +35,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 1/texture = ExtResource( 4 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 64, 0, 64, 64 )
+1/region = Rect2( 17, 0, 17, 13 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
 1/navigation_offset = Vector2( 0, 0 )
@@ -45,14 +46,29 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 1/shapes = [  ]
 1/z_index = 0
 
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
 [node name="Level" type="Node2D"]
 script = ExtResource( 3 )
 n_steps = 16
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 1 )
+tile_set = SubResource( 2 )
+cell_size = Vector2( 17, 13 )
 format = 1
 script = ExtResource( 2 )
 
 [node name="Die" type="AnimatedSprite" parent="."]
+position = Vector2( 11, 1 )
+frames = SubResource( 4 )
 script = ExtResource( 1 )
