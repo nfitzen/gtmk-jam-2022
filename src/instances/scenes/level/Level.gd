@@ -138,7 +138,10 @@ func initialize_grid(grid_size, n_steps):
 func _on_die_move(direction):
     logical_die_pos += DELTAS[direction]
     logical_die_state.move(direction)
-    grid[logical_die_pos.y][logical_die_pos.x] -= logical_die_state.bottom
+    grid[logical_die_pos.y][logical_die_pos.x] = max(
+        0,
+        grid[logical_die_pos.y][logical_die_pos.x] - logical_die_state.bottom
+        )
     update_tile(logical_die_pos)
     debug_print_grid()
 
