@@ -39,6 +39,10 @@ func _ready():
     connect("die_move", $"..", "_on_die_move")
     connect("restart_level", $"..", "_on_restart_level")
     connect("restart_level", self, "_on_restart_level")
+    lockout = true;
+    abort_frames = 1;
+    self.frame = 0;
+    move_left();
 
 func prime(inp : String):
     if(inp == "1" || inp == "4" || inp == "5"): return inp;
