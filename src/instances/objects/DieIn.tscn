@@ -33,7 +33,7 @@ animations = [ {
 
 [node name="DieIn" type="AnimatedSprite"]
 frames = SubResource( 6 )
-frame = 11
+frame = 10
 playing = true
 offset = Vector2( 9, -98 )
 script = ExtResource( 1 )
