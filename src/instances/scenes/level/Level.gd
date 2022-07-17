@@ -72,6 +72,7 @@ func reset_grid():
     for y in range(grid_size):
         for x in range(grid_size):
             grid[y][x] = original_grid[y][x]
+            update_tile(Vector2(x, y))
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
