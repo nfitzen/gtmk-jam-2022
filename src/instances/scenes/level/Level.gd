@@ -35,6 +35,7 @@ func weighted_range_choice(weights: Array):
         total_weights += weight
     
     var selector = randi() % total_weights
+    # print(weights, selector)
     var cumsum = 0
     var index = 0
     for weight in weights:
@@ -112,7 +113,7 @@ func initialize_grid(grid_size: int, n_steps: int):
         for x in range(grid_size):
             row.append(0)
             clone_row.append(0)
-            weights_row.append(5)
+            weights_row.append(1)
             tile_map.set_cell(x, y, BLACK_TILE)
         original_grid.append(row)
         grid.append(clone_row)
@@ -123,7 +124,7 @@ func initialize_grid(grid_size: int, n_steps: int):
     
     for _i in range(n_steps):
         var weights = []
-        for direction in range(LEFT):
+        for direction in range(LEFT+1):
             var hypothetical_pos = initializer_die_grid_pos + DELTAS[direction]
             if not in_bounds(hypothetical_pos, grid_size):
                 weights.append(0)
