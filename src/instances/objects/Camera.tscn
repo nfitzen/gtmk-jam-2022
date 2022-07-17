@@ -8,7 +8,7 @@ uniform vec3 med = vec3(0f, 1f, 0.5f);
 uniform vec3 light = vec3(1f, 1f, 1f);
 
 vec4 rgb_from_hsl(float h, float s, float l) {
-    float chroma = (1f - abs(2f * l)) * s;
+    float chroma = (1f - abs(2f * l - 1f)) * s;
     float hp = h * 6f;
     float x = chroma * (1f - abs(mod(hp, 2f) - 1f));
     vec4 rgb = vec4(0f,0f,0f,1.0f);
@@ -34,18 +34,21 @@ void fragment() {
     vec4 bg = texture(SCREEN_TEXTURE, SCREEN_UV);
     float avg = (bg.r + bg.g + bg.b) / 3.0f;
     if(avg < 0.5f) {
-        COLOR = rgb_from_hsl(dark.x + avg * 2f * (med.x - dark.x), dark.y + avg * 2f * (med.y - dark.y), dark.z + avg * 2f * (med.z - dark.z));
+        avg = avg * 2f;
+        COLOR = rgb_from_hsl(dark.x + avg * (med.x - dark.x), dark.y + avg * (med.y - dark.y), dark.z + avg * (med.z - dark.z));
     } else {
-        COLOR = rgb_from_hsl(med.x + (avg - 0.5f) * 2f * (light.x - med.x), med.y + (avg - 0.5f) * 2f * (light.y - med.y), med.z + (avg - 0.5f) * 2f * (light.z - med.z));
+        avg = avg - 0.5f;
+        avg = avg * 2f;
+        COLOR = rgb_from_hsl(med.x + avg * 2f * (light.x - med.x), med.y + avg * (light.y - med.y), med.z + avg * (light.z - med.z));
     }
     
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/dark = Plane( 0, 0, 0, 1 )
-shader_param/med = Vector3( 0.055, 1, 0.5 )
-shader_param/light = Vector3( 0.838, 1, 1 )
+shader_param/dark = Vector3( 0.757, 1, 0.06 )
+shader_param/med = Vector3( 0.499, 0.6, 0.467 )
+shader_param/light = Vector3( 0.765, 0, 0.894 )
 
 [node name="Camera" type="Camera2D"]
 current = true
@@ -57,6 +60,7 @@ zoom = Vector2( 0.5, 0.5 )
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_scale = Vector2( 0.696563, 3.42904 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
