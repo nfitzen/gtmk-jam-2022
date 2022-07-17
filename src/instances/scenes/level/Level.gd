@@ -125,4 +125,7 @@ func _on_die_move(direction):
     grid[logical_die_pos.y][logical_die_pos.x] -= logical_die_state.top
     update_tile(logical_die_pos)
     debug_print_grid()
-    
+
+func legal_move(direction):
+    var pos = logical_die_pos + DELTAS[direction]
+    return in_bounds(pos, grid_size) and grid[pos.y][pos.x]

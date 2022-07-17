@@ -133,6 +133,8 @@ func move_down():
     $passenger.playing = false;
 
 func move_direction(direction):
+    if not $"..".legal_move(direction):
+        return
     emit_signal("die_move", direction)
     match direction:
         UP:
