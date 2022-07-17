@@ -1,16 +1,15 @@
 <!-- SPDX-License-Identifier: FSFAP -->
 <!-- SPDX-FileCopyrightText: (C) 2022 nfitzen -->
 
-# the most scuffed thing imaginable
+# DICEPRESS
 
-oh god, oh god, we have less than 22 hours
+Roll the die with WASD to zero all of the tiles! If you get stuck, press R to try again. The face that hits the tile is subtracted from the tile's value, and you can hold SHIFT to preview which face it is.
 
-## copyright
+## Copyright
 
 ### Game
 
-Copyright &copy; 2022 nfitzen and other contributors (check blame god
-this is scuffed thank you berne convention)
+Copyright &copy; 2022 nfitzen, daatguy, UnrelatedString
 
 All code is licensed under [`GPL-3.0-or-later`]; that is, the
 GNU General Public License, either version 3, or (at your option) any later

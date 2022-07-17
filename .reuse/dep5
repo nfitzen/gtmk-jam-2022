@@ -1,0 +1,22 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: DICEPRESS
+Upstream-Contact: nfitzen <https://github.com/nfitzen>
+Source: https://github.com/nfitzen/gtmk-jam-2022
+
+# Sample paragraph, commented out:
+#
+# Files: src/*
+# Copyright: $YEAR $NAME <$CONTACT>
+# License: ...
+
+Files: src/*.tres src/project.godot src/*.import src/*.tscn
+Copyright: (C) 2022 nfitzen, daatguy, UnrelatedString
+License: GPL-3.0-or-later
+
+Files: src/assets/*
+Copyright: (C) 2022 daatguy
+License: GPL-3.0-or-later OR CC-BY-SA-4.0
+
+Files: src/assets/*.import
+Copyright: (C) 2022 daatguy
+License: GPL-3.0-or-later
