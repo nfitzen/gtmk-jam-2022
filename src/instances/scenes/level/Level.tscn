@@ -46,7 +46,6 @@ points = PoolVector2Array( 0, 0, 17, 0, 17, 13, 0, 13 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 3 )
-n_steps = 16
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )

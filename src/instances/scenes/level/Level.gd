@@ -18,7 +18,7 @@ enum {
     }
 
 export var grid_size = 4
-export var n_steps = 8
+export var n_steps = 16
 
 onready var tile_map = $"TileMap"
 onready var camera = $"Camera2D"
@@ -78,7 +78,7 @@ func initialize_grid(grid_size, n_steps):
         var weights_row = []
         for x in range(grid_size):
             row.append(0)
-            weights_row.append(3)
+            weights_row.append(5)
             tile_map.set_cell(x, y, BLACK_TILE)
         grid.append(row)
         gen_weights.append(weights_row)
@@ -95,9 +95,14 @@ func initialize_grid(grid_size, n_steps):
             else:
                 var weight = gen_weights[hypothetical_pos.y][hypothetical_pos.x]
                 weights.append(weight)
+        
+        for y in range(grid_size):
+            for x in range(grid_size):
+                gen_weights[y][x] += 2
+        gen_weights[initializer_die_grid_pos.y][initializer_die_grid_pos.x] = 1        
+                
         var direction = weighted_range_choice(weights)
         initializer_die.move(direction)
-        gen_weights[initializer_die_grid_pos.y][initializer_die_grid_pos.x] = 1
         initializer_die_grid_pos += DELTAS[direction]
         grid[initializer_die_grid_pos.y][initializer_die_grid_pos.x] += initializer_die.top
         tile_map.set_cellv(initializer_die_grid_pos, WHITE_TILE)
