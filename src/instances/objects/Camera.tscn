@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec4 dark = vec4(0f, 0f, 0f, 1f);
+uniform vec4 med = vec4(0f, 1f, 0.5f, 1f);
+uniform vec4 light = vec4(1f, 1f, 1f, 1f);
+
+vec4 rgb_from_hsl(float h, float s, float l) {
+    float chroma = (1f - abs(2f * l)) * s;
+    float hp = h * 6f;
+    float x = chroma * (1f - abs(mod(hp, 2f) - 1f));
+    vec4 rgb = vec4(0f,0f,0f,1.0f);
+    if(0f < hp && hp <= 1f) {
+        rgb += vec4(chroma, x, 0f, 0f);
+    } else if(1f < hp && hp <= 2f) {
+        rgb += vec4(x, chroma, 0f, 0f);
+    } else if(2f < hp && hp <= 3f) {
+        rgb += vec4(0f, chroma, x, 0f);
+    } else if(3f < hp && hp <= 4f) {
+        rgb += vec4(0f, x, chroma, 0f);
+    } else if(4f < hp && hp <= 5f) {
+        rgb += vec4(x, 0f, chroma, 0f);
+    } else {
+        rgb += vec4(chroma, 0f, x, 0f);
+    }
+    float m = l - chroma * 0.5;
+    rgb += vec4(m,m,m,0f);
+    return rgb;
+}
+
+void fragment() {
+    vec4 bg = texture(SCREEN_TEXTURE, SCREEN_UV);
+    float avg = (bg.r + bg.g + bg.b) / 3.0f;
+    if(avg < 0.5f) {
+        COLOR = rgb_from_hsl(dark.x + avg * 2f * (med.x - dark.x), dark.y + avg * 2f * (med.y - dark.y), dark.z + avg * 2f * (med.z - dark.z));
+    } else {
+        COLOR = rgb_from_hsl(med.x + (avg - 0.5f) * 2f * (light.x - med.x), med.y + (avg - 0.5f) * 2f * (light.y - med.y), med.z + (avg - 0.5f) * 2f * (light.z - med.z));
+    }
+    
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/dark = Plane( 0, 0, 0, 1 )
+shader_param/med = Plane( 0, 1, 0.5, 1 )
+shader_param/light = Plane( 1, 1, 1, 1 )
+
+[node name="Camera2D" type="Camera2D"]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

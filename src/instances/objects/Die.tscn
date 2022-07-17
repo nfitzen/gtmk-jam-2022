@@ -115,7 +115,7 @@ position = Vector2( 9, -2 )
 z_index = 2
 frames = ExtResource( 3 )
 animation = "moving"
-frame = 15
+frame = 147
 playing = true
 
 [node name="old" type="AnimatedSprite" parent="."]
