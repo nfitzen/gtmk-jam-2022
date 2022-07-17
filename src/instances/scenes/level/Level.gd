@@ -52,6 +52,10 @@ func debug_print_grid():
     print()
 
 func initialize_grid(grid_size, n_steps):
+
+    var tmp = round(grid_size / 2.0)
+    Camera.position = Vector2(tmp, tmp)
+
     for y in range(grid_size):
         var row = []
         for x in range(grid_size):
