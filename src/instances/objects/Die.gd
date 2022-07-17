@@ -10,6 +10,8 @@ signal level_won
 
 onready var Sound = preload("res://instances/objects/Sound.tscn");
 onready var exit = preload("res://assets/sounds/lift.wav");
+onready var outline_on = preload("res://assets/sounds/on.wav");
+onready var outline_off = preload("res://assets/sounds/off.wav");
 onready var flips = [
     preload("res://assets/sounds/flip0.wav"),
     preload("res://assets/sounds/flip1.wav"),
@@ -18,7 +20,7 @@ onready var flips = [
     preload("res://assets/sounds/flip4.wav"),
     ];
     
-
+var outline_sound = -1;
 var lockout : bool
 var queued : int
 var abort_frames = -1;
@@ -201,20 +203,30 @@ func move():
         move_direction(DOWN)
             
 func _process(_delta):
+    var old_outline_sound = outline_sound;
     if($exit.visible):
         $"../Camera".shake = 1;
     move();
     if Input.is_action_just_pressed("toggle_indicator"):
         #exit()
         indicator_lock = !indicator_lock;
+        if indicator_lock:
+            outline_sound = 1;
+        else:
+            outline_sound = 0;
     if (Input.is_action_pressed("indicator") || indicator_lock) && !lockout:
         if(!$indicator.visible):
             $indicator/east.frame = 0;
             $indicator/north.frame = 0;
             $indicator/west.frame = 0;
             $indicator/south.frame = 0;
+            if(Input.is_action_just_pressed("indicator")): outline_sound = 1;
         $indicator.visible = true;
     else:
+        if(!Input.is_action_pressed("indicator") && !indicator_lock):
+            outline_sound = -1;
+        if($indicator.visible && !lockout):
+            outline_sound = 0;
         $indicator.visible = false;
     $base.visible = (!$indicator.visible && !$exit.visible);
     #$old.visible = !$indicator.visible;
@@ -238,6 +250,14 @@ func _process(_delta):
         $side_north.visible = false;
         $side_west.visible = false;
         $side_south.visible = false;
+    if(old_outline_sound != outline_sound && outline_sound >= 0 && !lockout):
+        var sound = Sound.instance();
+        sound.volume_db = -2;
+        if(outline_sound == 1):
+            sound.stream = outline_on;
+        else:
+            sound.stream = outline_off;
+        $"..".add_child(sound);
 
 func exit():
     $exit.visible = true;
