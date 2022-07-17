@@ -21,7 +21,7 @@ export var grid_size = 4
 export var n_steps = 8
 
 onready var tile_map = $"TileMap"
-onready var camera = $"Camera2D"
+onready var camera = $"Camera"
 
 func in_bounds(vec, size):
     return vec.x >= 0 and vec.y >= 0 and vec.x < size and vec.y < size
