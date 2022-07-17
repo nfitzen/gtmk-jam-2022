@@ -26,6 +26,12 @@ onready var Camera = get_node("Camera2D")
 func in_bounds(vec, size):
     return vec.x >= 0 and vec.y >= 0 and vec.x < size and vec.y < size
 
+func probably_not(x, y):
+    return x != y or randi() % 3 == 0
+
+func in_bounds_and_probably_not(vec, size, other): # this is unbelievably stupid but i'd rather not repeat the next-position expression lmao
+    return in_bounds(vec, size) and probably_not(vec, other)
+
 var die_grid_pos = Vector2(0, 0)
 
 var grid = []
@@ -60,9 +66,10 @@ func initialize_grid(grid_size, n_steps):
         grid.append(row)
     var initializer_die = MutableDieState.new()
     var initializer_die_grid_pos = Vector2(0, 0)
+    var previous_pos = Vector2(0, 0)
     for _i in range(n_steps):
         var direction = randi() % 4
-        while not in_bounds(initializer_die_grid_pos + DELTAS[direction], grid_size):
+        while not in_bounds_and_probably_not(initializer_die_grid_pos + DELTAS[direction], grid_size, previous_pos):
             direction = randi() % 4
         initializer_die.move(direction)
         initializer_die_grid_pos += DELTAS[direction]
