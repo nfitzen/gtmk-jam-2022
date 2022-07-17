@@ -1,5 +1,7 @@
 extends Node2D
 
+signal die_move
+
 var lockout : bool = false;
 var queued : int = -1;
 enum {
@@ -23,6 +25,9 @@ var side_indices = {
     "6" : 7,
     "6p" : 8,
    };
+
+func _ready():
+    connect("die_move", $"..", "_on_die_move")
 
 func prime(inp : String):
     if(inp == "1" || inp == "4" || inp == "5"): return inp;
@@ -128,6 +133,7 @@ func move_down():
     $passenger.playing = false;
 
 func move_direction(direction):
+    emit_signal("die_move", direction)
     match direction:
         UP:
             move_up()

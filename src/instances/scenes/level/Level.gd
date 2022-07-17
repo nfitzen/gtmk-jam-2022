@@ -46,9 +46,9 @@ var die_grid_pos = Vector2(0, 0)
 var grid = []
 
 class MutableDieState:
-    var top = 1
-    var bottom = 6
-    var sides = [5,4,2,3]
+    var top = 6
+    var bottom = 1
+    var sides = [4,2,3,5]
 
     func move(direction):
         var old_top = top
@@ -56,6 +56,9 @@ class MutableDieState:
         sides[direction] = bottom
         bottom = sides[direction^2]
         sides[direction^2] = old_top
+
+var logical_die_pos = Vector2(0, 0)
+var logical_die_state = MutableDieState.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -116,8 +119,10 @@ func initialize_grid(grid_size, n_steps):
         update_tile(initializer_die_grid_pos)
         debug_print_grid()
 
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass
+func _on_die_move(direction):
+    logical_die_pos += DELTAS[direction]
+    logical_die_state.move(direction)
+    grid[logical_die_pos.y][logical_die_pos.x] -= logical_die_state.top
+    update_tile(logical_die_pos)
+    debug_print_grid()
+    
