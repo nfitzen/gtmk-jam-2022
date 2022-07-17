@@ -26,8 +26,6 @@ onready var Die = preload("res://instances/objects/DieIn.tscn");
 onready var tile_map = $TileMap
 onready var camera = $Camera
 
-signal level_won
-
 func in_bounds(vec: Vector2, size: int):
     return vec.x >= 0 and vec.y >= 0 and vec.x < size and vec.y < size
     
@@ -80,8 +78,6 @@ func reset_grid():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    var metalevel = get_parent()
-    connect("level_won", metalevel, "change_level")
     initialize_grid(grid_size, n_steps)
     reset_logical_die()
 
@@ -181,7 +177,8 @@ func _on_die_move(direction: int):
     debug_print_grid()
 
     if check_win():
-        emit_signal("level_won")
+        $"Die".exit();
+        #emit_signal("level_won")
 
 func legal_move(direction: int):
     var pos = logical_die_pos + DELTAS[direction]

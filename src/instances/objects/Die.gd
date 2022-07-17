@@ -3,6 +3,8 @@ extends Node2D
 signal die_move
 signal restart_level
 
+signal level_won
+
 onready var Sound = preload("res://instances/objects/Sound.tscn");
 onready var exit = preload("res://assets/sounds/lift.wav");
 onready var flips = [
@@ -46,6 +48,7 @@ func reset_state():
     lockout = false
 
 func _ready():
+    connect("level_won", $"../..", "change_level")
     reset_state()
     connect("die_move", $"..", "_on_die_move")
     connect("restart_level", $"..", "_on_restart_level")
@@ -200,8 +203,8 @@ func _process(_delta):
         $"../Camera".shake = 1;
     move();
     if Input.is_action_just_pressed("toggle_indicator"):
-        exit()
-        #indicator_lock = !indicator_lock;
+        #exit()
+        indicator_lock = !indicator_lock;
     if (Input.is_action_pressed("indicator") || indicator_lock) && !lockout:
         if(!$indicator.visible):
             $indicator/east.frame = 0;
@@ -271,7 +274,6 @@ func _on_base_animation_finished():
     $incoming.frame = side_indices[sides[TOP]];
     $incoming.playing = false;
 
-
 func _on_Die_animation_finished():
     if(abort_frames >= 0): abort_frames -= 1;
     if(abort_frames == 0):
@@ -281,3 +283,7 @@ func _on_Die_animation_finished():
 func _on_restart_level():
     reset_state()
     position = Vector2(0, 0)
+
+func _on_exit_animation_finished():
+    if($exit.visible):
+        emit_signal("level_won");
