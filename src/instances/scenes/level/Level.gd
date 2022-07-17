@@ -66,6 +66,12 @@ func debug_print_grid():
         print(row)
     print()
 
+func update_tile(pos):
+    if grid[pos.y][pos.x] > 0:
+        tile_map.set_cellv(pos, WHITE_TILE)
+    else:
+        tile_map.set_cellv(pos, BLACK_TILE)
+
 func initialize_grid(grid_size, n_steps):
 
     var tmp = round(grid_size / 2.0)
@@ -107,7 +113,7 @@ func initialize_grid(grid_size, n_steps):
         initializer_die.move(direction)
         initializer_die_grid_pos += DELTAS[direction]
         grid[initializer_die_grid_pos.y][initializer_die_grid_pos.x] += initializer_die.top
-        tile_map.set_cellv(initializer_die_grid_pos, WHITE_TILE)
+        update_tile(initializer_die_grid_pos)
         debug_print_grid()
 
 
