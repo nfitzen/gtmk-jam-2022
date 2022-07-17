@@ -173,7 +173,8 @@ func move():
 func _process(_delta):
     move();
     if Input.is_action_just_pressed("toggle_indicator"):
-        indicator_lock = !indicator_lock;
+        exit()
+        #indicator_lock = !indicator_lock;
     if (Input.is_action_pressed("indicator") || indicator_lock) && !lockout:
         if(!$indicator.visible):
             $indicator/east.frame = 0;
@@ -183,10 +184,14 @@ func _process(_delta):
         $indicator.visible = true;
     else:
         $indicator.visible = false;
-    $base.visible = !$indicator.visible;
+    $base.visible = (!$indicator.visible && !$exit.visible);
     #$old.visible = !$indicator.visible;
     $incoming.visible = !$indicator.visible;
     $passenger.visible = !$indicator.visible;
+    if($exit.frame > 3):
+        $passenger.visible = false;
+        #$top.visible = false;
+        $incoming.visible = false;
     if($indicator.visible):
         $side_east.frame = side_indices[sides[EAST]];
         $side_north.frame = side_indices[sides[NORTH]];
@@ -201,6 +206,12 @@ func _process(_delta):
         $side_north.visible = false;
         $side_west.visible = false;
         $side_south.visible = false;
+
+func exit():
+    $exit.visible = true;
+    $exit.frame = 0;
+    $exit.playing = true;
+    $base.visible = false;
 
 func _on_base_animation_finished():
     if(abort_frames == -1): 
