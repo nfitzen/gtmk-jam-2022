@@ -1,8 +1,11 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://assets/sprites/dice plain.png" type="Texture" id=1]
 [ext_resource path="res://instances/objects/Die.gd" type="Script" id=2]
 [ext_resource path="res://instances/objects/DieNumbersSprite.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://assets/sprites/indicator.png" type="Texture" id=4]
+[ext_resource path="res://instances/objects/DieIndicatorIcons.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://instances/objects/indicator.gd" type="Script" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -100,6 +103,70 @@ animations = [ {
 "speed": 20.0
 } ]
 
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=22]
+animations = [ {
+"frames": [ SubResource( 23 ), SubResource( 24 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=31]
+animations = [ {
+"frames": [ SubResource( 32 ), SubResource( 33 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 4 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 4 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=36]
+animations = [ {
+"frames": [ SubResource( 34 ), SubResource( 35 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 4 )
+region = Rect2( 384, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 4 )
+region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=30]
+animations = [ {
+"frames": [ SubResource( 28 ), SubResource( 29 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
 [node name="Die" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -115,7 +182,7 @@ position = Vector2( 9, -2 )
 z_index = 2
 frames = ExtResource( 3 )
 animation = "moving"
-frame = 189
+frame = 178
 playing = true
 
 [node name="old" type="AnimatedSprite" parent="."]
@@ -128,6 +195,57 @@ animation = "moving"
 position = Vector2( 9, -2 )
 frames = SubResource( 18 )
 animation = "idle"
+playing = true
+
+[node name="side_east" type="AnimatedSprite" parent="."]
+position = Vector2( 25, -4 )
+z_index = 6
+frames = ExtResource( 5 )
+centered = false
+
+[node name="side_north" type="AnimatedSprite" parent="."]
+position = Vector2( 6, -22 )
+z_index = 6
+frames = ExtResource( 5 )
+centered = false
+
+[node name="side_west" type="AnimatedSprite" parent="."]
+position = Vector2( -14, -4 )
+z_index = 6
+frames = ExtResource( 5 )
+centered = false
+
+[node name="side_south" type="AnimatedSprite" parent="."]
+position = Vector2( 5, 15 )
+z_index = 6
+frames = ExtResource( 5 )
+centered = false
+
+[node name="indicator" type="Node2D" parent="."]
+z_index = 5
+script = ExtResource( 6 )
+
+[node name="east" type="AnimatedSprite" parent="indicator"]
+position = Vector2( 9, -2 )
+frames = SubResource( 22 )
+frame = 1
+playing = true
+
+[node name="north" type="AnimatedSprite" parent="indicator"]
+position = Vector2( 9, -2 )
+frames = SubResource( 31 )
+frame = 1
+playing = true
+
+[node name="west" type="AnimatedSprite" parent="indicator"]
+position = Vector2( 9, -2 )
+frames = SubResource( 36 )
+playing = true
+
+[node name="south" type="AnimatedSprite" parent="indicator"]
+position = Vector2( 9, -2 )
+frames = SubResource( 30 )
+frame = 1
 playing = true
 
 [connection signal="animation_finished" from="base" to="." method="_on_base_animation_finished"]

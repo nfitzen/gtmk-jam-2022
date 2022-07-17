@@ -25,6 +25,7 @@ var side_indices = {
     "6" : 7,
     "6p" : 8,
    };
+var indicator_lock : bool = false;
 
 func _ready():
     connect("die_move", $"..", "_on_die_move")
@@ -165,6 +166,31 @@ func move():
 
 func _process(_delta):
     move();
+    if Input.is_action_just_pressed("toggle_indicator"):
+        indicator_lock = !indicator_lock;
+    if (Input.is_action_pressed("indicator") || indicator_lock) && !lockout:
+        if(!$indicator.visible):
+            $indicator/east.frame = 0;
+            $indicator/north.frame = 0;
+            $indicator/west.frame = 0;
+            $indicator/south.frame = 0;
+        $indicator.visible = true;
+    else:
+        $indicator.visible = false;
+    if($indicator.visible):
+        $side_east.frame = side_indices[sides[EAST]];
+        $side_north.frame = side_indices[sides[NORTH]];
+        $side_west.frame = side_indices[sides[WEST]];
+        $side_south.frame = side_indices[sides[SOUTH]];
+        $side_east.visible = $indicator/east.visible;
+        $side_north.visible = $indicator/north.visible;
+        $side_west.visible = $indicator/west.visible;
+        $side_south.visible = $indicator/south.visible;
+    else:
+        $side_east.visible = false;
+        $side_north.visible = false;
+        $side_west.visible = false;
+        $side_south.visible = false;
 
 func _on_base_animation_finished():
     if($base.animation == "left"): position.x -= 17;
