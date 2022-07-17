@@ -6,9 +6,9 @@ extends Node2D
 enum {UP, RIGHT, DOWN, LEFT}
 
 const DELTAS = [
-    Vector2(0, 1),
-    Vector2(1, 0),
     Vector2(0, -1),
+    Vector2(1, 0),
+    Vector2(0, 1),
     Vector2(-1, 0)
    ]
 
