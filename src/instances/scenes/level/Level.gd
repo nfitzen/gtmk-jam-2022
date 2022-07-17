@@ -22,13 +22,13 @@ export var n_steps = 16
 
 onready var Number = preload("res://instances/objects/Number.tscn");
 
-onready var tile_map = $"TileMap"
-onready var camera = $"Camera"
+onready var tile_map = $TileMap
+onready var camera = $Camera
 
-func in_bounds(vec, size):
+func in_bounds(vec: Vector2, size: int):
     return vec.x >= 0 and vec.y >= 0 and vec.x < size and vec.y < size
     
-func weighted_range_choice(weights):
+func weighted_range_choice(weights: Array):
     # how fucking skeletal can the builtin set be
     var total_weights = 0
     for weight in weights:
@@ -72,15 +72,14 @@ func debug_print_grid():
         print(row)
     print()
 
-func update_tile(pos):
+func update_tile(pos: Vector2):
     get_node("Numbers/" + str(pos.y * grid_size + pos.x)).value = grid[pos.y][pos.x];
     if grid[pos.y][pos.x] > 0:
         tile_map.set_cellv(pos, WHITE_TILE)
     else:
         tile_map.set_cellv(pos, BLACK_TILE)
 
-func initialize_grid(grid_size, n_steps):
-
+func initialize_grid(grid_size: int, n_steps: int):
     for y in range(grid_size):
         for x in range(grid_size):
             var new_num = Number.instance();
@@ -135,7 +134,7 @@ func initialize_grid(grid_size, n_steps):
         for x in range(grid_size):
             get_node("Numbers/" + str(y * grid_size + x)).value = grid[y][x];
 
-func _on_die_move(direction):
+func _on_die_move(direction: int):
     logical_die_pos += DELTAS[direction]
     logical_die_state.move(direction)
     grid[logical_die_pos.y][logical_die_pos.x] = max(
@@ -145,7 +144,7 @@ func _on_die_move(direction):
     update_tile(logical_die_pos)
     debug_print_grid()
 
-func legal_move(direction):
+func legal_move(direction: int):
     var pos = logical_die_pos + DELTAS[direction]
     return in_bounds(pos, grid_size) and grid[pos.y][pos.x]
     
