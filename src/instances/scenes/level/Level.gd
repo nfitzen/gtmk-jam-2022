@@ -21,6 +21,7 @@ export var grid_size = 4
 export var n_steps = 16
 
 onready var Number = preload("res://instances/objects/Number.tscn");
+onready var Die = preload("res://instances/objects/DieIn.tscn");
 
 onready var tile_map = $TileMap
 onready var camera = $Camera
@@ -189,3 +190,7 @@ func legal_move(direction: int):
 func _on_restart_level():
     reset_logical_die()
     reset_grid()
+    $"Die".queue_free();
+    var die = Die.instance();
+    die.fast = true;
+    add_child(die);

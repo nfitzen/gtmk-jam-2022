@@ -57,6 +57,6 @@ tile_data = PoolIntArray( 0, 0, 0 )
 [node name="Camera" parent="." instance=ExtResource( 2 )]
 
 [node name="DieIn" parent="." instance=ExtResource( 5 )]
-frame = 1
+frame = 8
 
 [node name="Numbers" type="Node2D" parent="."]
