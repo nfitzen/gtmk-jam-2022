@@ -4,97 +4,97 @@
 [ext_resource path="res://instances/objects/Die.gd" type="Script" id=2]
 [ext_resource path="res://instances/objects/DieNumbersSprite.tres" type="SpriteFrames" id=3]
 
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 1 )
-region = Rect2( 256, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 128, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
 region = Rect2( 128, 128, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
 region = Rect2( 192, 128, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 256, 128, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 64, 64, 64, 64 )
+region = Rect2( 64, 192, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 128, 64, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 64, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 1 )
-region = Rect2( 256, 64, 64, 64 )
+region = Rect2( 128, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
+region = Rect2( 192, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 256, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 256, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 1 )
 region = Rect2( 128, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 1 )
 region = Rect2( 256, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=18]
 animations = [ {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
-"loop": false,
-"name": "right",
-"speed": 20.0
-}, {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": false,
 "name": "left",
 "speed": 20.0
 }, {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": false,
+"name": "right",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": false,
 "name": "up",
 "speed": 20.0
 }, {
-"frames": [ SubResource( 7 ) ],
+"frames": [ SubResource( 13 ) ],
 "loop": true,
 "name": "idle",
 "speed": 20.0
 }, {
-"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": false,
 "name": "down",
 "speed": 20.0
@@ -115,7 +115,7 @@ position = Vector2( 9, -2 )
 z_index = 2
 frames = ExtResource( 3 )
 animation = "moving"
-frame = 349
+frame = 0 
 playing = true
 
 [node name="old" type="AnimatedSprite" parent="."]
@@ -126,7 +126,7 @@ animation = "moving"
 
 [node name="base" type="AnimatedSprite" parent="."]
 position = Vector2( 9, -2 )
-frames = SubResource( 8 )
+frames = SubResource( 18 )
 animation = "idle"
 playing = true
 

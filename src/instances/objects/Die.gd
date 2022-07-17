@@ -1,5 +1,7 @@
 extends Node2D
 
+signal die_move
+
 var lockout : bool = false;
 var queued : int = -1;
 enum {
@@ -10,6 +12,7 @@ enum {
     EAST,
     WEST,
    }
+enum {UP, RIGHT, DOWN, LEFT}
 var sides = ["6", "1", "3", "4", "5", "2"];
 var side_indices = {
     "1" : 0,
@@ -22,6 +25,9 @@ var side_indices = {
     "6" : 7,
     "6p" : 8,
    };
+
+func _ready():
+    connect("die_move", $"..", "_on_die_move")
 
 func prime(inp : String):
     if(inp == "1" || inp == "4" || inp == "5"): return inp;
@@ -126,6 +132,20 @@ func move_down():
     $passenger.visible = false;
     $passenger.playing = false;
 
+func move_direction(direction):
+    if not $"..".legal_move(direction):
+        return
+    emit_signal("die_move", direction)
+    match direction:
+        UP:
+            move_up()
+        RIGHT:
+            move_right()
+        DOWN:
+            move_down()
+        LEFT:
+            move_left()
+
 func move():
     if(lockout):
         if($base.frame > 0):
@@ -135,17 +155,13 @@ func move():
             if Input.is_action_just_pressed("down"): queued = 3;
         return;
     if Input.is_action_just_pressed("right") || queued == 0:
-        move_right();
-        return;
-    if Input.is_action_just_pressed("up") || queued == 1: 
-        move_up();
-        return;
-    if Input.is_action_just_pressed("left") || queued == 2:
-        move_left();
-        return;
-    if Input.is_action_just_pressed("down") || queued == 3: 
-        move_down();
-        return;
+        move_direction(RIGHT)
+    elif Input.is_action_just_pressed("up") || queued == 1: 
+        move_direction(UP)
+    elif Input.is_action_just_pressed("left") || queued == 2:
+        move_direction(LEFT)
+    elif Input.is_action_just_pressed("down") || queued == 3: 
+        move_direction(DOWN)
 
 func _process(_delta):
     move();
