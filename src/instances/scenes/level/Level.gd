@@ -25,6 +25,8 @@ onready var Number = preload("res://instances/objects/Number.tscn");
 onready var tile_map = $TileMap
 onready var camera = $Camera
 
+signal level_won
+
 func in_bounds(vec: Vector2, size: int):
     return vec.x >= 0 and vec.y >= 0 and vec.x < size and vec.y < size
     
@@ -77,6 +79,8 @@ func reset_grid():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    var metalevel = get_parent()
+    connect("level_won", metalevel, "change_level")
     initialize_grid(grid_size, n_steps)
     reset_logical_die()
 
@@ -153,8 +157,8 @@ func initialize_grid(grid_size: int, n_steps: int):
 
 func check_win() -> bool:
     for row in grid:
-        for space in row:
-            if row > 0:
+        for val in row:
+            if val > 0:
                 return false
     return true
 
@@ -174,6 +178,9 @@ func _on_die_move(direction: int):
         )
     update_tile(logical_die_pos)
     debug_print_grid()
+
+    if check_win():
+        emit_signal("level_won")
 
 func legal_move(direction: int):
     var pos = logical_die_pos + DELTAS[direction]
