@@ -3,6 +3,7 @@ extends Node2D
 export var value : int;
 
 func _process(_delta):
+    self.visible = value > 0;
     $left.visible = value >= 10;
     $right.visible = value >= 10;
     $middle.visible = value < 10;

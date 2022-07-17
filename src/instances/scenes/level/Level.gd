@@ -53,6 +53,7 @@ class MutableDieState:
     var sides = [4,2,3,5]
 
     func move(direction):
+        print("Moving " + str(direction));
         var old_top = top
         top = sides[direction]
         sides[direction] = bottom
@@ -126,7 +127,7 @@ func initialize_grid(grid_size, n_steps):
         var direction = weighted_range_choice(weights)
         initializer_die.move(direction)
         initializer_die_grid_pos += DELTAS[direction]
-        grid[initializer_die_grid_pos.y][initializer_die_grid_pos.x] += initializer_die.top
+        grid[initializer_die_grid_pos.y][initializer_die_grid_pos.x] += initializer_die.bottom
         update_tile(initializer_die_grid_pos)
         debug_print_grid()
         
@@ -137,7 +138,7 @@ func initialize_grid(grid_size, n_steps):
 func _on_die_move(direction):
     logical_die_pos += DELTAS[direction]
     logical_die_state.move(direction)
-    grid[logical_die_pos.y][logical_die_pos.x] -= logical_die_state.top
+    grid[logical_die_pos.y][logical_die_pos.x] -= logical_die_state.bottom
     update_tile(logical_die_pos)
     debug_print_grid()
 

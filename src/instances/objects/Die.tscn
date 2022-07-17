@@ -192,7 +192,7 @@ position = Vector2( 9, -2 )
 z_index = 2
 frames = ExtResource( 3 )
 animation = "moving"
-frame = 117
+frame = 150
 playing = true
 
 [node name="old" type="AnimatedSprite" parent="."]
@@ -244,18 +244,17 @@ playing = true
 [node name="north" type="AnimatedSprite" parent="indicator"]
 position = Vector2( 9, -2 )
 frames = SubResource( 31 )
-frame = 1
 playing = true
 
 [node name="west" type="AnimatedSprite" parent="indicator"]
 position = Vector2( 9, -2 )
 frames = SubResource( 36 )
+frame = 1
 playing = true
 
 [node name="south" type="AnimatedSprite" parent="indicator"]
 position = Vector2( 9, -2 )
 frames = SubResource( 30 )
-frame = 1
 playing = true
 
 [connection signal="animation_finished" from="." to="." method="_on_Die_animation_finished"]
