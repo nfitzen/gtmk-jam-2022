@@ -20,8 +20,8 @@ enum {
 export var grid_size = 4
 export var n_steps = 8
 
-onready var TileMap = get_node("TileMap")
-onready var Camera = get_node("Camera2D")
+onready var tile_map = $"TileMap"
+onready var camera = $"Camera2D"
 
 func in_bounds(vec, size):
     return vec.x >= 0 and vec.y >= 0 and vec.x < size and vec.y < size
@@ -62,7 +62,7 @@ func initialize_grid(grid_size, n_steps):
         var row = []
         for x in range(grid_size):
             row.append(0)
-            TileMap.set_cell(x, y, BLACK_TILE)
+            tile_map.set_cell(x, y, BLACK_TILE)
         grid.append(row)
     var initializer_die = MutableDieState.new()
     var initializer_die_grid_pos = Vector2(0, 0)
@@ -74,7 +74,7 @@ func initialize_grid(grid_size, n_steps):
         initializer_die.move(direction)
         initializer_die_grid_pos += DELTAS[direction]
         grid[initializer_die_grid_pos.y][initializer_die_grid_pos.x] += initializer_die.top
-        TileMap.set_cellv(initializer_die_grid_pos, WHITE_TILE)
+        tile_map.set_cellv(initializer_die_grid_pos, WHITE_TILE)
         debug_print_grid()
 
 
