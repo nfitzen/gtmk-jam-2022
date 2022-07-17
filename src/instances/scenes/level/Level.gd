@@ -134,6 +134,20 @@ func initialize_grid(grid_size: int, n_steps: int):
         for x in range(grid_size):
             get_node("Numbers/" + str(y * grid_size + x)).value = grid[y][x];
 
+func check_win() -> bool:
+    for row in grid:
+        for space in row:
+            if row > 0:
+                return false
+    return true
+
+func check_loss(die_pos: Vector2) -> bool:
+    for d in DELTAS:
+        var tmp = die_pos+d
+        if grid[tmp.y][tmp.x] > 0:
+            return false
+    return true
+
 func _on_die_move(direction: int):
     logical_die_pos += DELTAS[direction]
     logical_die_state.move(direction)
@@ -147,4 +161,3 @@ func _on_die_move(direction: int):
 func legal_move(direction: int):
     var pos = logical_die_pos + DELTAS[direction]
     return in_bounds(pos, grid_size) and grid[pos.y][pos.x]
-    
