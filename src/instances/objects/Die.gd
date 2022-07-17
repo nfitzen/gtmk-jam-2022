@@ -196,6 +196,8 @@ func move():
         move_direction(DOWN)
             
 func _process(_delta):
+    if($exit.visible):
+        $"../Camera".shake = 1;
     move();
     if Input.is_action_just_pressed("toggle_indicator"):
         exit()
