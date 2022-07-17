@@ -1,9 +1,10 @@
 extends Node2D
 
 signal die_move
+signal restart_level
 
-var lockout : bool = false;
-var queued : int = -1;
+var lockout : bool
+var queued : int
 var abort_frames = -1;
 enum {
     TOP,
@@ -14,7 +15,7 @@ enum {
     WEST,
    }
 enum {UP, RIGHT, DOWN, LEFT}
-var sides = ["6", "1", "3", "4", "5", "2"];
+var sides
 var side_indices = {
     "1" : 0,
     "2" : 1,
@@ -28,8 +29,16 @@ var side_indices = {
    };
 var indicator_lock : bool = false;
 
+func reset_state():
+    queued = -1
+    sides = ["6", "1", "3", "4", "5", "2"]
+    lockout = false
+
 func _ready():
+    reset_state()
     connect("die_move", $"..", "_on_die_move")
+    connect("restart_level", $"..", "_on_restart_level")
+    connect("restart_level", self, "_on_restart_level")
 
 func prime(inp : String):
     if(inp == "1" || inp == "4" || inp == "5"): return inp;
@@ -154,14 +163,15 @@ func move_direction(direction):
             move_left()
 
 func move():
-    if(lockout):
+    if Input.is_action_just_pressed("restart"):
+        emit_signal("restart_level")
+    elif(lockout):
         if($base.frame > 0):
             if Input.is_action_just_pressed("right"): queued = RIGHT;
             if Input.is_action_just_pressed("up"): queued = UP;
             if Input.is_action_just_pressed("left"): queued = LEFT;
             if Input.is_action_just_pressed("down"): queued = DOWN;
-        return;
-    if Input.is_action_just_pressed("right") || queued == RIGHT:
+    elif Input.is_action_just_pressed("right") || queued == RIGHT:
         move_direction(RIGHT)
     elif Input.is_action_just_pressed("up") || queued == UP: 
         move_direction(UP)
@@ -230,3 +240,7 @@ func _on_Die_animation_finished():
     if(abort_frames == 0):
         _on_base_animation_finished();
         abort_frames = -1;
+
+func _on_restart_level():
+    reset_state()
+    position = Vector2(0, 0)

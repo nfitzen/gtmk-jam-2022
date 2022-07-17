@@ -46,6 +46,7 @@ func weighted_range_choice(weights: Array):
 var die_grid_pos = Vector2(0, 0)
 
 var grid = []
+var original_grid = []
 
 class MutableDieState:
     var top = 6
@@ -60,12 +61,22 @@ class MutableDieState:
         bottom = sides[direction^2]
         sides[direction^2] = old_top
 
-var logical_die_pos = Vector2(0, 0)
-var logical_die_state = MutableDieState.new()
+var logical_die_pos
+var logical_die_state
+
+func reset_logical_die():
+    logical_die_pos = Vector2(0, 0)
+    logical_die_state = MutableDieState.new()
+
+func reset_grid():
+    for y in range(grid_size):
+        for x in range(grid_size):
+            grid[y][x] = original_grid[y][x]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     initialize_grid(grid_size, n_steps)
+    reset_logical_die()
 
 func debug_print_grid():
     for row in grid:
@@ -95,12 +106,15 @@ func initialize_grid(grid_size: int, n_steps: int):
 
     for y in range(grid_size):
         var row = []
+        var clone_row = []
         var weights_row = []
         for x in range(grid_size):
             row.append(0)
+            clone_row.append(0)
             weights_row.append(5)
             tile_map.set_cell(x, y, BLACK_TILE)
-        grid.append(row)
+        original_grid.append(row)
+        grid.append(clone_row)
         gen_weights.append(weights_row)
         
     var initializer_die = MutableDieState.new()
@@ -112,7 +126,7 @@ func initialize_grid(grid_size: int, n_steps: int):
             var hypothetical_pos = initializer_die_grid_pos + DELTAS[direction]
             if not in_bounds(hypothetical_pos, grid_size):
                 weights.append(0)
-            elif grid[hypothetical_pos.y][hypothetical_pos.x] > 93:
+            elif original_grid[hypothetical_pos.y][hypothetical_pos.x] > 93:
                 weights.append(0)
             else:
                 var weight = gen_weights[hypothetical_pos.y][hypothetical_pos.x]
@@ -126,6 +140,7 @@ func initialize_grid(grid_size: int, n_steps: int):
         var direction = weighted_range_choice(weights)
         initializer_die.move(direction)
         initializer_die_grid_pos += DELTAS[direction]
+        original_grid[initializer_die_grid_pos.y][initializer_die_grid_pos.x] += initializer_die.bottom
         grid[initializer_die_grid_pos.y][initializer_die_grid_pos.x] += initializer_die.bottom
         update_tile(initializer_die_grid_pos)
         debug_print_grid()
@@ -161,3 +176,7 @@ func _on_die_move(direction: int):
 func legal_move(direction: int):
     var pos = logical_die_pos + DELTAS[direction]
     return in_bounds(pos, grid_size) and grid[pos.y][pos.x]
+    
+func _on_restart_level():
+    reset_logical_die()
+    reset_grid()
