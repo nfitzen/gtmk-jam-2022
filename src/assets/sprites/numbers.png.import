@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dicemap.png-12b3920995293af8d4240b19a0e001bc.stex"
+path="res://.import/numbers.png-fac1f9370de6285cc67b3ba74f93beb8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/dicemap.png"
-dest_files=[ "res://.import/dicemap.png-12b3920995293af8d4240b19a0e001bc.stex" ]
+source_file="res://assets/sprites/numbers.png"
+dest_files=[ "res://.import/numbers.png-fac1f9370de6285cc67b3ba74f93beb8.stex" ]
 
 [params]
 
