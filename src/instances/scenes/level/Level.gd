@@ -25,12 +25,21 @@ onready var camera = $"Camera2D"
 
 func in_bounds(vec, size):
     return vec.x >= 0 and vec.y >= 0 and vec.x < size and vec.y < size
-
-func probably_not(x, y):
-    return x != y or randi() % 3 == 0
-
-func in_bounds_and_probably_not(vec, size, other): # this is unbelievably stupid but i'd rather not repeat the next-position expression lmao
-    return in_bounds(vec, size) and probably_not(vec, other)
+    
+func weighted_range_choice(weights):
+    # how fucking skeletal can the builtin set be
+    var total_weights = 0
+    for weight in weights:
+        total_weights += weight
+    
+    var selector = randi() % total_weights
+    var cumsum = 0
+    var index = 0
+    for weight in weights:
+        cumsum += weight
+        if cumsum > selector:
+            return index
+        index += 1
 
 var die_grid_pos = Vector2(0, 0)
 
@@ -62,20 +71,33 @@ func initialize_grid(grid_size, n_steps):
     var tmp = round(grid_size / 2.0)
     camera.position = Vector2(tmp, tmp)
 
+    var gen_weights = []
+
     for y in range(grid_size):
         var row = []
+        var weights_row = []
         for x in range(grid_size):
             row.append(0)
+            weights_row.append(3)
             tile_map.set_cell(x, y, BLACK_TILE)
         grid.append(row)
+        gen_weights.append(weights_row)
+        
     var initializer_die = MutableDieState.new()
     var initializer_die_grid_pos = Vector2(0, 0)
-    var previous_pos = Vector2(0, 0)
+    
     for _i in range(n_steps):
-        var direction = randi() % 4
-        while not in_bounds_and_probably_not(initializer_die_grid_pos + DELTAS[direction], grid_size, previous_pos):
-            direction = randi() % 4
+        var weights = []
+        for direction in range(LEFT):
+            var hypothetical_pos = initializer_die_grid_pos + DELTAS[direction]
+            if not in_bounds(hypothetical_pos, grid_size):
+                weights.append(0)
+            else:
+                var weight = gen_weights[hypothetical_pos.y][hypothetical_pos.x]
+                weights.append(weight)
+        var direction = weighted_range_choice(weights)
         initializer_die.move(direction)
+        gen_weights[initializer_die_grid_pos.y][initializer_die_grid_pos.x] = 1
         initializer_die_grid_pos += DELTAS[direction]
         grid[initializer_die_grid_pos.y][initializer_die_grid_pos.x] += initializer_die.top
         tile_map.set_cellv(initializer_die_grid_pos, WHITE_TILE)
