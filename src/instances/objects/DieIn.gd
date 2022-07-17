@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: (C) 2022 nfitzen, daatguy, UnrelatedString
+
 extends AnimatedSprite
 
 onready var Die = preload("res://instances/objects/Die.tscn");

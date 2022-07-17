@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: (C) 2022 nfitzen, daatguy, UnrelatedString
+
 extends Node2D
 
 export var value : int;
