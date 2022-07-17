@@ -92,6 +92,8 @@ func initialize_grid(grid_size, n_steps):
             var hypothetical_pos = initializer_die_grid_pos + DELTAS[direction]
             if not in_bounds(hypothetical_pos, grid_size):
                 weights.append(0)
+            elif grid[hypothetical_pos.y][hypothetical_pos.x] > 93:
+                weights.append(0)
             else:
                 var weight = gen_weights[hypothetical_pos.y][hypothetical_pos.x]
                 weights.append(weight)
