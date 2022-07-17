@@ -20,6 +20,8 @@ enum {
 export var grid_size = 4
 export var n_steps = 16
 
+onready var Number = preload("res://instances/objects/Number.tscn");
+
 onready var tile_map = $"TileMap"
 onready var camera = $"Camera"
 
@@ -72,10 +74,19 @@ func debug_print_grid():
 func update_tile(pos):
     if grid[pos.y][pos.x] > 0:
         tile_map.set_cellv(pos, WHITE_TILE)
+        get_node("Numbers/" + str(pos.y * grid_size + pos.x)).value = grid[pos.y][pos.x];
     else:
         tile_map.set_cellv(pos, BLACK_TILE)
 
 func initialize_grid(grid_size, n_steps):
+
+    for y in range(grid_size):
+        for x in range(grid_size):
+            var new_num = Number.instance();
+            new_num.position.x = x * 17;
+            new_num.position.y = y * 13;
+            new_num.name = "" + str(y * grid_size + x);
+            $Numbers.add_child(new_num);
 
     var tmp = round(grid_size / 2.0)
     camera.position = Vector2(tmp, tmp)
@@ -118,6 +129,10 @@ func initialize_grid(grid_size, n_steps):
         grid[initializer_die_grid_pos.y][initializer_die_grid_pos.x] += initializer_die.top
         update_tile(initializer_die_grid_pos)
         debug_print_grid()
+        
+    for y in range(grid_size):
+        for x in range(grid_size):
+            get_node("Numbers/" + str(y * grid_size + x)).value = grid[y][x];
 
 func _on_die_move(direction):
     logical_die_pos += DELTAS[direction]
@@ -129,3 +144,4 @@ func _on_die_move(direction):
 func legal_move(direction):
     var pos = logical_die_pos + DELTAS[direction]
     return in_bounds(pos, grid_size) and grid[pos.y][pos.x]
+    
