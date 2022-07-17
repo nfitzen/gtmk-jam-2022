@@ -73,9 +73,9 @@ func debug_print_grid():
     print()
 
 func update_tile(pos):
+    get_node("Numbers/" + str(pos.y * grid_size + pos.x)).value = grid[pos.y][pos.x];
     if grid[pos.y][pos.x] > 0:
         tile_map.set_cellv(pos, WHITE_TILE)
-        get_node("Numbers/" + str(pos.y * grid_size + pos.x)).value = grid[pos.y][pos.x];
     else:
         tile_map.set_cellv(pos, BLACK_TILE)
 
