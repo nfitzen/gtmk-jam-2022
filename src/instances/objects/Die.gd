@@ -4,6 +4,7 @@ signal die_move
 signal restart_level
 
 onready var Sound = preload("res://instances/objects/Sound.tscn");
+onready var exit = preload("res://assets/sounds/lift.wav");
 onready var flips = [
     preload("res://assets/sounds/flip0.wav"),
     preload("res://assets/sounds/flip1.wav"),
@@ -236,6 +237,10 @@ func exit():
     $exit.frame = 0;
     $exit.playing = true;
     $base.visible = false;
+    var sound = Sound.instance();
+    #sound.volume_db = -8;
+    sound.stream = exit;
+    $"..".add_child(sound);
 
 func _on_base_animation_finished():
     if(abort_frames == -1): 
