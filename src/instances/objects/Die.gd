@@ -169,7 +169,6 @@ func move_direction(direction):
     if not $"..".legal_move(direction):
         abort_frames = 1;
         self.frame = 0;
-    else: emit_signal("die_move", direction)
     match direction:
         UP:
             move_up()
@@ -218,7 +217,7 @@ func _process(_delta):
     #$old.visible = !$indicator.visible;
     $incoming.visible = !$indicator.visible;
     $passenger.visible = !$indicator.visible;
-    if($exit.frame > 3):
+    if($exit.frame > 5):
         $passenger.visible = false;
         #$top.visible = false;
         $incoming.visible = false;
@@ -249,11 +248,21 @@ func exit():
 
 func _on_base_animation_finished():
     if(abort_frames == -1): 
-        if($base.animation == "left"): position.x -= 17;
-        if($base.animation == "right"): position.x += 17;
-        if($base.animation == "up"): position.y -= 13
-        if($base.animation == "down"): position.y += 13;
+        var direction;
+        if($base.animation == "left"): 
+            position.x -= 17;
+            direction = LEFT;
+        if($base.animation == "right"): 
+            position.x += 17;
+            direction = RIGHT;
+        if($base.animation == "up"): 
+            position.y -= 13
+            direction = UP;
+        if($base.animation == "down"): 
+            position.y += 13;
+            direction = DOWN;
         if($base.animation != "idle"):
+            emit_signal("die_move", direction);
             var sound = Sound.instance();
             sound.volume_db = -8;
             sound.stream = flips[randi() % flips.size()];

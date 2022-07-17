@@ -219,7 +219,7 @@ region = Rect2( 576, 0, 64, 256 )
 
 [sub_resource type="SpriteFrames" id=40]
 animations = [ {
-"frames": [ SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), null ],
+"frames": [ SubResource( 41 ), SubResource( 41 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), null ],
 "loop": false,
 "name": "default",
 "speed": 20.0
@@ -242,7 +242,7 @@ position = Vector2( 9, -2 )
 z_index = 2
 frames = ExtResource( 3 )
 animation = "moving"
-frame = 485
+frame = 167
 playing = true
 
 [node name="old" type="AnimatedSprite" parent="."]
