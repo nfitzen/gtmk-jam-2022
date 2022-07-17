@@ -3,6 +3,16 @@ extends Node2D
 signal die_move
 signal restart_level
 
+onready var Sound = preload("res://instances/objects/Sound.tscn");
+onready var flips = [
+    preload("res://assets/sounds/flip0.wav"),
+    preload("res://assets/sounds/flip1.wav"),
+    preload("res://assets/sounds/flip2.wav"),
+    preload("res://assets/sounds/flip3.wav"),
+    preload("res://assets/sounds/flip4.wav"),
+    ];
+    
+
 var lockout : bool
 var queued : int
 var abort_frames = -1;
@@ -233,6 +243,11 @@ func _on_base_animation_finished():
         if($base.animation == "right"): position.x += 17;
         if($base.animation == "up"): position.y -= 13
         if($base.animation == "down"): position.y += 13;
+        if($base.animation != "idle"):
+            var sound = Sound.instance();
+            sound.volume_db = -8;
+            sound.stream = flips[randi() % flips.size()];
+            $"..".add_child(sound);
     $base.animation = "idle";
     $base.frame = 0;
     lockout = false;
