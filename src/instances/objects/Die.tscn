@@ -242,7 +242,7 @@ position = Vector2( 9, -2 )
 z_index = 2
 frames = ExtResource( 3 )
 animation = "moving"
-frame = 17
+frame = 127
 playing = true
 
 [node name="old" type="AnimatedSprite" parent="."]
@@ -290,23 +290,23 @@ script = ExtResource( 6 )
 [node name="east" type="AnimatedSprite" parent="indicator"]
 position = Vector2( 9, -2 )
 frames = SubResource( 22 )
+frame = 1
 playing = true
 
 [node name="north" type="AnimatedSprite" parent="indicator"]
 position = Vector2( 9, -2 )
 frames = SubResource( 25 )
-frame = 1
 playing = true
 
 [node name="west" type="AnimatedSprite" parent="indicator"]
 position = Vector2( 9, -2 )
 frames = SubResource( 28 )
+frame = 1
 playing = true
 
 [node name="south" type="AnimatedSprite" parent="indicator"]
 position = Vector2( 9, -2 )
 frames = SubResource( 31 )
-frame = 1
 playing = true
 
 [node name="exit" type="AnimatedSprite" parent="."]
