@@ -92,7 +92,7 @@ animations = [ {
 "frames": [ SubResource( 7 ) ],
 "loop": true,
 "name": "idle",
-"speed": 12.0
+"speed": 20.0
 }, {
 "frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
 "loop": false,
@@ -107,24 +107,22 @@ script = ExtResource( 2 )
 position = Vector2( 9, -2 )
 z_index = 3
 frames = ExtResource( 3 )
-frame = 374
-playing = true
+animation = "moving"
+frame = 36
 
 [node name="passenger" type="AnimatedSprite" parent="."]
-visible = false
 position = Vector2( 9, -2 )
 z_index = 2
 frames = ExtResource( 3 )
-frame = 361
+animation = "moving"
+frame = 15
 playing = true
 
-[node name="top" type="AnimatedSprite" parent="."]
-visible = false
+[node name="old" type="AnimatedSprite" parent="."]
 position = Vector2( 9, -2 )
 z_index = 1
 frames = ExtResource( 3 )
-frame = 349
-playing = true
+animation = "moving"
 
 [node name="base" type="AnimatedSprite" parent="."]
 position = Vector2( 9, -2 )
