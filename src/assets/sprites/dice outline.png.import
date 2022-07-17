@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/indicator.png-37ab31a54516d7dca086eda0139232bc.stex"
+path="res://.import/dice outline.png-65852fe294f09b4423d7c73789261fac.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/indicator.png"
-dest_files=[ "res://.import/indicator.png-37ab31a54516d7dca086eda0139232bc.stex" ]
+source_file="res://assets/sprites/dice outline.png"
+dest_files=[ "res://.import/dice outline.png-65852fe294f09b4423d7c73789261fac.stex" ]
 
 [params]
 

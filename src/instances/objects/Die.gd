@@ -183,6 +183,10 @@ func _process(_delta):
         $indicator.visible = true;
     else:
         $indicator.visible = false;
+    $base.visible = !$indicator.visible;
+    #$old.visible = !$indicator.visible;
+    $incoming.visible = !$indicator.visible;
+    $passenger.visible = !$indicator.visible;
     if($indicator.visible):
         $side_east.frame = side_indices[sides[EAST]];
         $side_north.frame = side_indices[sides[NORTH]];
