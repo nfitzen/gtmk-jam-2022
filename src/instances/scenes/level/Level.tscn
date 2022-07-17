@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://instances/scenes/level/Die.gd" type="Script" id=1]
-[ext_resource path="res://instances/scenes/level/TileMap.gd" type="Script" id=2]
 [ext_resource path="res://instances/scenes/level/Level.gd" type="Script" id=3]
 [ext_resource path="res://assets/sprites/tilemap.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/dice plain.png" type="Texture" id=5]
@@ -66,9 +65,12 @@ n_steps = 16
 tile_set = SubResource( 2 )
 cell_size = Vector2( 17, 13 )
 format = 1
-script = ExtResource( 2 )
+tile_data = PoolIntArray( 0, 0, 0 )
 
 [node name="Die" type="AnimatedSprite" parent="."]
-position = Vector2( 11, 1 )
+position = Vector2( 9, -2 )
 frames = SubResource( 4 )
 script = ExtResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true

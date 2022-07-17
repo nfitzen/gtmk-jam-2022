@@ -5,7 +5,7 @@ extends Node2D
 
 enum {UP, RIGHT, DOWN, LEFT}
 
-var deltas = [
+const DELTAS = [
 	Vector2(0, 1),
 	Vector2(1, 0),
 	Vector2(0, -1),
@@ -61,10 +61,10 @@ func initialize_grid(grid_size, n_steps):
 	var initializer_die_grid_pos = Vector2(0, 0)
 	for _i in range(n_steps):
 		var direction = randi() % 4
-		while not in_bounds(initializer_die_grid_pos + deltas[direction], grid_size):
+		while not in_bounds(initializer_die_grid_pos + DELTAS[direction], grid_size):
 			direction = randi() % 4
 		initializer_die.move(direction)
-		initializer_die_grid_pos += deltas[direction]
+		initializer_die_grid_pos += DELTAS[direction]
 		grid[initializer_die_grid_pos.y][initializer_die_grid_pos.x] += initializer_die.top
 		TileMap.set_cellv(initializer_die_grid_pos, WHITE_TILE)
 		debug_print_grid()
