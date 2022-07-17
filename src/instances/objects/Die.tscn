@@ -17,7 +17,7 @@ animations = [ {
 
 [node name="Die" type="Node2D"]
 
-[node name="Die" type="AnimatedSprite" parent="."]
+[node name="base" type="AnimatedSprite" parent="."]
 position = Vector2( 9, -2 )
 frames = SubResource( 2 )
 script = ExtResource( 2 )
