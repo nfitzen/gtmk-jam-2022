@@ -61,6 +61,7 @@ func _ready():
 
 func change_level():
     remove_child(current_level)
+    current_level.queue_free()
     level += 1
     current_level = Level.instance()
     set_progression(current_level, level)
