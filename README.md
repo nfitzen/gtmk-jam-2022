@@ -1,9 +1,11 @@
 <!-- SPDX-License-Identifier: FSFAP -->
-<!-- SPDX-FileCopyrightText: (C) 2022 nfitzen -->
+<!-- SPDX-FileCopyrightText: (C) 2022 nfitzen, UnrelatedString -->
 
 # DICEPRESS
 
-Roll the die with WASD to zero all of the tiles! If you get stuck, press R to try again. The face that hits the tile is subtracted from the tile's value, and you can hold SHIFT to preview which face it is.
+Roll the die with WASD to zero all of the tiles! If you get stuck,
+press R to try again. The face that hits the tile is subtracted from the tile's
+value, and you can hold SHIFT to preview which face it is.
 
 ## Copyright
 
@@ -29,7 +31,7 @@ non-trivial, are licensed under Expat/MIT,
 
 ### README
 
-Copyright &copy; 2022 nfitzen
+Copyright &copy; 2022 nfitzen, UnrelatedString
 
 Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright notice
